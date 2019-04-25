@@ -35,8 +35,23 @@ class commande{
 		return $this->status;
 	}
 
-	function setcustomer_id($customer_id){
+	function setid($id){
+		$this->id=$id;
+	}
+    function setcustomer_id($customer_id){
 		$this->customer_id=$customer_id;
+	}
+    function settotal_price($total_price){
+		$this->total_price=$total_price;
+	}
+    function setcreated($created){
+		$this->created=$created;
+	}
+    function setmodified($modified){
+		$this->modified=$modified;
+	}
+    function setstatus($status){
+		$this->status=$status;
 	}
 }
 

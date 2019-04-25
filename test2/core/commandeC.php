@@ -121,6 +121,18 @@ try{
             die('Erreur: '.$e->getMessage());
         }
 	}
+    function tri($str,$stc){
+		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+		$sql="SElECT id,total_price,created from orders order by $str $stc";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
 }
 
 ?>

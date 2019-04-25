@@ -6,7 +6,7 @@ if (isset($_POST['id']) and isset($_POST['customer_id']) and isset($_POST['total
 $commande1=new commande($_POST['id'],$_POST['customer_id'],$_POST['total_price'],$_POST['created'],$_POST['modified'],$_POST['status']);
 $commande1C=new commandeC();
 $commande1C->ajouterCommande($commande1);
-header('Location: afficherCammande.php');
+header('Location: afficherCommande.php');
 	
 }else{
 	echo "vérifier les champs";

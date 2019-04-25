@@ -1,4 +1,6 @@
+
 <?php session_start();
+include '../dbConfig.php';
 class Cart {
     protected $cart_contents = array();
     

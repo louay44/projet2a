@@ -1,6 +1,11 @@
+<?PHP
+include "../core/codec.php";
+$commandesc1=new codec();
+?>
+
 <html>
-<head>
-    <title>Gretong a Ecommerce Admin Panel Category Flat Bootstrap Responsive Web Template | Sweater :: w3layouts</title>
+    <head>
+        <title>Gretong a Ecommerce Admin Panel Category Flat Bootstrap Responsive Web Template | Sweater :: w3layouts</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Gretong Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -62,23 +67,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
     </script>
-</head>
-<body>
-<?PHP
-include "../entities/commande.php";
-include "../core/commandeC.php";
-if (isset($_GET['id'])){
-	$commandeC=new commandeC();
-    $result=$commandeC->recupererCommande($_GET['id']);
-	foreach($result as $row){
-		$id=$row['id'];
-		$customer_id=$row['customer_id'];
-        $total_price=$row['total_price'];
-        $created=$row['created'];
-        $modified=$row['modified'];
-        $status=$row['status'];
-?>
-    <div class="page-container">
+    </head>
+    <body>
+        <div class="page-container">
    <!--/content-inner-->
 	<div class="left-content">
 	   <div class="inner-content">
@@ -155,49 +146,43 @@ if (isset($_GET['id'])){
 					<!-- //header-ends -->
 				<!--content-->
            <div style="margin-left: 100px;">
-               <form method="POST">
-<table>
-<caption>Modifier Commande</caption>
-<tr>
-<td>Id</td>
-<td><input type="number" name="id" id="id" required value="<?PHP echo $id ?>"></td>
-	<td><span id="missid"></span><br></td>
-</tr>
-<tr>
-<td>Customer_Id</td>
-<td><input type="number" name="customer_id" id="customer_id" required value="<?PHP echo $customer_id ?>"></td>
-	<td><span id="misscustomer_id"></span><br></td>
-</tr>
-<tr>
-<td>Toatl Price</td>
-<td><input type="number" name="total_price" id="total_price" required value="<?PHP echo $total_price ?>"></td>
-	<td><span id="misstotal_price"></span><br></td>
-</tr>
-<tr>
-<td>Created</td>
-<td><input type="date" name="created" id="created" required value="<?PHP echo $created ?>"></td>
-	<td><span id="misscreated"></span><br></td>
-</tr>
-<tr>
-<td>Modified</td>
-<td><input type="date" name="modified" id="modified" required value="<?PHP echo $modified ?>"></td>
-	<td><span id="missmodified"></span><br></td>
-</tr>
-<tr>
-<td>Status</td>
-<td><input type="number" name="status" id="status" required value="<?PHP echo $status ?>"></td>
-	<td><span id="missstatus"></span><br></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="submit" name="modifier" value="modifier" id="bouton"></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
-</tr>
-</table>
-</form>
+                <script src="../jquery.min.js"></script>   
+           
+           <br /><br />  
+           <div id="container" >  
+                <input type="text" name="country" id="country" class="form-control" placeholder="Recherche.." />
+        <p></p>
+        
+      <!--  <select name="pays" id="pays">
+                <option value="produit">produit</option>
+                <option value="1"></option>
+            </select> -->
+                <div id="countryList"></div>  
+           </div>  
+       
+ <script> 
+ {
+ $(document).ready(function(){  
+      $('#country').keyup(function(){  
+           var query = $(this).val(); 
+          if(query != '') 
+            { 
+                $.ajax({  
+                     url:"fetch1.php",  
+                     method:"POST",  
+                     data:{query:query},  
+                     success:function(data)  
+                     {  
+                          $('#countryList').fadeIn();  
+                          $('#countryList').html(data);  
+                     }  
+                }); 
+
+       } 
+      }); 
+ });}
+
+ </script>
            </div>
 <div class="content">
 <div class="women_main">
@@ -330,117 +315,7 @@ if (isset($_GET['id'])){
 							  </div>
 							  <div class="clearfix"></div>	
 							</div>
-
-<?PHP
-	}
-}
-if (isset($_POST['modifier'])){
-	$commande=new commande($_POST['id'],$_POST['customer_id'],$_POST['total_price'],$_POST['created'],$_POST['modified'],$_POST['status']);
-	$commandeC->modifierCommande($commande,$_POST['id_ini']);
-	echo $_POST['id_ini'];
-	header('Location: afficherCommande.php');
-}
-?>
-	<script>
-	var formValid = document.getElementById('bouton');
-            var id = document.getElementById('id');
-            var missid = document.getElementById('missid');
-            var idValid = /^[A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+([-'\s][A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+)?$/;
-            
-            formValid.addEventListener('click', validation);
-            
-            function validation(event){
-                //Si le champ est vide
-                if (id.validity.valueMissing){
-                    event.preventDefault();
-                    missid.textContent = 'id manquant';
-                    missid.style.color = 'red';
-                //Si le format de données est incorrect
-                }
-            }
-	var formValid = document.getElementById('bouton');
-            var customer_id = document.getElementById('customer_id');
-            var misscustomer_id = document.getElementById('misscustomer_id');
-            var customer_idValid = /^[A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+([-'\s][A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+)?$/;
-            
-            formValid.addEventListener('click', validation1);
-            
-            function validation1(event){
-                //Si le champ est vide
-                if (customer_id.validity.valueMissing){
-                    event.preventDefault();
-                    misscustomer_id.textContent = 'customer_id manquant';
-                    misscustomer_id.style.color = 'red';
-                //Si le format de données est incorrect
-                }
-            }
-	var formValid = document.getElementById('bouton');
-            var total_price = document.getElementById('total_price');
-            var misstotal_price = document.getElementById('misstotal_price');
-            var total_priceValid = /^[A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+([-'\s][A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+)?$/;
-            
-            formValid.addEventListener('click', validation2);
-            
-            function validation2(event){
-                //Si le champ est vide
-                if (total_price.validity.valueMissing){
-                    event.preventDefault();
-                    misstotal_price.textContent = 'total_price manquant';
-                    misstotal_price.style.color = 'red';
-                //Si le format de données est incorrect
-                }
-            }
-	var formValid = document.getElementById('bouton');
-            var created = document.getElementById('created');
-            var misscreated = document.getElementById('misscreated');
-            var createdValid = /^[A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+([-'\s][A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+)?$/;
-            
-            formValid.addEventListener('click', validation3);
-            
-            function validation3(event){
-                //Si le champ est vide
-                if (created.validity.valueMissing){
-                    event.preventDefault();
-                    misscreated.textContent = 'created manquant';
-                    misscreated.style.color = 'red';
-                //Si le format de données est incorrect
-                }
-            }
-		var formValid = document.getElementById('bouton');
-            var modified = document.getElementById('modified');
-            var missmodified = document.getElementById('missmodified');
-            var modifiedValid = /^[A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+([-'\s][A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+)?$/;
-            
-            formValid.addEventListener('click', validation4);
-            
-            function validation4(event){
-                //Si le champ est vide
-                if (modified.validity.valueMissing){
-                    event.preventDefault();
-                    missmodified.textContent = 'modified manquant';
-                    missmodified.style.color = 'red';
-                //Si le format de données est incorrect
-                }
-            }
-        var formValid = document.getElementById('bouton');
-            var status = document.getElementById('status');
-            var missstatus = document.getElementById('missstatus');
-            var statusValid = /^[A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+([-'\s][A-Za-zéèîïÉÈÎÏ][A-Zéèêàçîï]+)?$/;
-            
-            formValid.addEventListener('click', validation10);
-            
-            function validation10(event){
-                //Si le champ est vide
-                if (status.validity.valueMissing){
-                    event.preventDefault();
-                    missstatus.textContent = 'status manquant';
-                    missstatus.style.color = 'red';
-                //Si le format de données est incorrect
-                }
-            }
-	
-	</script>
-    <script>
+        <script>
 							var toggle = true;
 										
 							$(".sidebar-icon").click(function() {                
@@ -678,5 +553,7 @@ if (isset($_POST['modifier'])){
 
     </script>
 		   <script src="js/menu_jquery.js"></script>
+
+
 </body>
 </html>

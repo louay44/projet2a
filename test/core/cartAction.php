@@ -1,9 +1,8 @@
 <?php
-// initialize shopping cart class
+
 include '../entities/Cart.php';
 $cart = new Cart;
 
-// include database configuration file
 include '../dbConfig.php';
 if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
     if($_REQUEST['action'] == 'addToCart' && !empty($_REQUEST['id'])){

@@ -1,7 +1,29 @@
 <?php
+// On démarre la session (ceci est indispensable dans toutes les pages de notre section membre)
+session_start ();  
+ 
+// On récupère nos variables de session
+if (isset($_SESSION['l']) && isset($_SESSION['p'])) 
+{ 
+
+	echo '<a href="./logout.php">Cliquer pour se déconnecter</a>';
+
+}
+
+else { 
+      echo 'Veuillez vous connecter </br>';  
+	  echo '<a href="./auth.html">Cliquer pour se connecter</a>';
+
+}  
+//définir la session une session est un tableau temporaire 
+//1 er point c quoi une session
+// 
+?>
+<?php
 // include database configuration file
 include '../dbConfig.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +94,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul >
 						<li><a href="login.html">Login</a></li>
 						<li><a href="register.html">Register</a></li>
-						<li><a href="checkout.html">Checkout</a></li>
+						<li><a href="../../test2/views/sweater.html">BackOffice</a></li>
 					</ul>
 				</div>
 				
